@@ -15,17 +15,21 @@ export const Signup = () => {
   const navigate = useNavigate();
 
   async function signUpFun() {
-    const res = await axios.post(
-      "https://paynow-backend.onrender.com/api/v1/user/signup",
-      {
-        username,
-        password,
-        firstName,
-        lastName,
-      }
-    );
-    localStorage.setItem("token", res.data.token);
-    navigate("/dashboard");
+    try {
+      const res = await axios.post(
+        "https://paynow-backend.onrender.com/api/v1/user/signup",
+        {
+          username,
+          password,
+          firstName,
+          lastName,
+        }
+      );
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log("Invalid credentials");
+    }
   }
 
   function toSignIn() {

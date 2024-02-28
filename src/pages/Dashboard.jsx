@@ -9,20 +9,24 @@ export const Dashboard = () => {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("https://paynow-backend.onrender.com/api/v1/bank/balance", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        const data = response.data; // Access the response data
-        setFirstName(data.firstName);
-        setBalance(data.balance);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    try {
+      axios
+        .get("https://paynow-backend.onrender.com/api/v1/bank/balance", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          const data = response.data; // Access the response data
+          setFirstName(data.firstName);
+          setBalance(data.balance);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    } catch (error) {
+      alert(error);
+    }
   }, []);
 
   return (
