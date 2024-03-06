@@ -5,6 +5,7 @@ export const Appbar = ({ nameFirstLetter }) => {
   function logOutFun() {
     localStorage.clear();
     navigate("/signin");
+    window.location.reload(false);
   }
   return (
     <div className="flex items-center justify-between p-5 border-b-2 border-slate-300">

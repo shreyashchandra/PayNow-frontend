@@ -28,7 +28,8 @@ export const Signup = () => {
         }
       );
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard", { replace: true });
+      navigate("/dashboard");
+      window.location.reload(false);
       setTracker(false);
     } catch (error) {
       console.log("Invalid credentials");
@@ -87,7 +88,7 @@ export const Signup = () => {
               <p>Signing up...</p>
             </div>
           ) : (
-            "SignIn"
+            "SignUp"
           )
         }
       />

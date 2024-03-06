@@ -22,7 +22,8 @@ export const Signin = () => {
         }
       );
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard", { replace: true });
+      navigate("/dashboard");
+      window.location.reload(false);
       setTracker(false);
     } catch (error) {
       alert("Invalid credentials");
