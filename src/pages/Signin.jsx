@@ -9,9 +9,11 @@ import { useState } from "react";
 export const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setpassword] = useState("");
+  const [tracker, setTracker] = useState(false);
   const navigate = useNavigate();
   async function signInFun() {
     try {
+      setTracker(true);
       const res = await axios.post(
         "https://paynow-backend.onrender.com/api/v1/user/signin",
         {
@@ -20,9 +22,11 @@ export const Signin = () => {
         }
       );
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
+      setTracker(false);
     } catch (error) {
       alert("Invalid credentials");
+      setTracker(false);
     }
   }
 
@@ -40,7 +44,25 @@ export const Signin = () => {
         lable={"Password"}
         val={"secret"}
       />
-      <Button onClick={signInFun} lable={"SignIn"} />
+      <Button
+        onClick={signInFun}
+        lable={
+          tracker ? (
+            <div className="flex justify-center  items-center">
+              <div
+                className="animate-spin inline-block w-5 h-5 mr-4 border-[3px] border-current border-t-transparent text-white rounded-full "
+                role="status"
+                aria-label="loading"
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+              <p>Signing up...</p>
+            </div>
+          ) : (
+            "SignIn"
+          )
+        }
+      />
       <p className="text-sm text-gray-500 mt-1 text-center">
         Dont have an account?{" "}
         <a

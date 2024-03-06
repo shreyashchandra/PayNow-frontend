@@ -12,10 +12,12 @@ export const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setpassword] = useState("");
+  const [tracker, setTracker] = useState(false);
   const navigate = useNavigate();
 
   async function signUpFun() {
     try {
+      setTracker(true);
       const res = await axios.post(
         "https://paynow-backend.onrender.com/api/v1/user/signup",
         {
@@ -26,9 +28,11 @@ export const Signup = () => {
         }
       );
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
+      setTracker(false);
     } catch (error) {
       console.log("Invalid credentials");
+      setTracker(false);
     }
   }
 
@@ -68,7 +72,25 @@ export const Signup = () => {
         lable={"Password"}
         val={"secret"}
       />
-      <Button onClick={signUpFun} lable={"SignUp"} />
+      <Button
+        onClick={signUpFun}
+        lable={
+          tracker ? (
+            <div className="flex justify-center  items-center">
+              <div
+                className="animate-spin inline-block w-5 h-5 mr-4 border-[3px] border-current border-t-transparent text-white rounded-full "
+                role="status"
+                aria-label="loading"
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+              <p>Signing up...</p>
+            </div>
+          ) : (
+            "SignIn"
+          )
+        }
+      />
       <p className="text-sm text-gray-500 mt-1 text-center">
         Already have an account?{" "}
         <a onClick={toSignIn} className="underline font-bold cursor-pointer">
