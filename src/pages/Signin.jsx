@@ -119,6 +119,7 @@ export const Signin = () => {
           onChange={(e) => setpassword(e.target.value)}
           lable={"Password"}
           val={"secret"}
+          type={"password"}
         />
         <Button
           onClick={signInFun}
