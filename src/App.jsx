@@ -53,7 +53,7 @@ function App() {
             }
           />
           <Route
-            path="/update-details"
+            path="/update-user"
             element={
               localStorage.getItem("token") ? (
                 <UpdateDetails />
