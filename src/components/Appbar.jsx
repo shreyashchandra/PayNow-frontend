@@ -15,7 +15,7 @@ export const Appbar = ({ nameFirstLetter }) => {
         PayNow
       </h1>
       <div className="flex items-center font-bold">
-        <h3 className=" text-gray-500 ">Hello,</h3>
+        <h3 className=" text-gray-300 ">Hello,</h3>
         <div className=" cursor-pointer text-white font-bold m-3 w-5 h-5 bg-sky-600 rounded-full flex justify-center items-center text-center p-5 shadow-xl hover:bg-sky-500 relative">
           <div onClick={() => setIsClicked((prev) => !prev)}>
             {nameFirstLetter}
