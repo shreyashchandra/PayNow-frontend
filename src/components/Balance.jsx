@@ -10,8 +10,8 @@ export const Balance = ({ Userbalance }) => {
         <p className="p-2">Wallet</p>
         <FontAwesomeIcon icon={faWallet} />
       </h2>
-      <h3 className="text-xl mt-3 font-bold">
-        Balance: <span className="font-semibold"> ₹ {Userbalance}</span>{" "}
+      <h3 className="text-xl mt-3 font-bold text-slate-300">
+        Balance: <span className="font-semibold "> ₹ {Userbalance}</span>{" "}
       </h3>
     </div>
   );

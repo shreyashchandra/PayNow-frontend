@@ -35,7 +35,7 @@ export const SendMoney = () => {
   }
 
   return (
-    <div className="p-28 w-[550px] h-[600px] mt-16 mx-auto bg-white">
+    <div className="p-28 w-full md:w-[550px] md:h-[600px] mt-20 mx-auto bg-slate-950 rounded-lg text-slate-200">
       <Heading title={"Send Money"} />
       <SendDisplayUser />
       <Inputbox
@@ -51,7 +51,7 @@ export const SendMoney = () => {
           tracker ? (
             <div className="flex justify-center  items-center">
               <div
-                className="animate-spin inline-block w-5 h-5 mr-4 border-[3px] border-current border-t-transparent text-white rounded-full "
+                className="animate-spin inline-block w-5 h-5 mr-4 border-[3px] border-current border-t-transparent  rounded-full "
                 role="status"
                 aria-label="loading"
               >
@@ -60,7 +60,7 @@ export const SendMoney = () => {
               <p>Intiate Transfer</p>
             </div>
           ) : (
-            "SignIn"
+            "PayNow"
           )
         }
       />

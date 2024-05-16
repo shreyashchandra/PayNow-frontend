@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(238, 238, 238);
+  background-image: url("../public/bg.png");
 }

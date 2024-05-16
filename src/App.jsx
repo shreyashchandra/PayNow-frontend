@@ -4,6 +4,7 @@ import { Signin } from "./pages/Signin";
 import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
 import { Me } from "./components/Me";
+import { UpdateDetails } from "./pages/UpdateDetails";
 
 function App() {
   return (
@@ -46,6 +47,16 @@ function App() {
             element={
               localStorage.getItem("token") ? (
                 <SendMoney />
+              ) : (
+                <Navigate to={"/signin"} />
+              )
+            }
+          />
+          <Route
+            path="/update-details"
+            element={
+              localStorage.getItem("token") ? (
+                <UpdateDetails />
               ) : (
                 <Navigate to={"/signin"} />
               )

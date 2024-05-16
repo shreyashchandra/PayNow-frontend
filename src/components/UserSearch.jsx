@@ -20,14 +20,16 @@ export const UserSearch = () => {
   return (
     <div className="p-3">
       <div>
-        <h3 className="text-lg font-semibold">Users</h3>
+        <h3 className="text-lg font-semibold text-slate-300">
+          Users: ({users.length})
+        </h3>
         <input
           onChange={(e) => {
             setFilter(e.target.value);
           }}
           type="text"
           placeholder="Search users..."
-          className="w-full h-10 rounded-md border p-1 border-sky-600"
+          className="w-full h-14 rounded-md border p-1 border-sky-600"
         />
       </div>
 
