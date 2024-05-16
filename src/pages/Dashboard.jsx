@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { Balance } from "../components/Balance";
 import { UserSearch } from "../components/UserSearch";
 import axios from "axios";
+import { Loader } from "../components/Loader";
 
 export const Dashboard = () => {
   const [firstName, setFirstName] = useState("");
@@ -38,7 +39,9 @@ export const Dashboard = () => {
           <UserSearch />
         </>
       ) : (
-        <div>Loading</div>
+        <div className="flex items-center justify-center">
+          <Loader />
+        </div>
       )}
     </div>
   );
