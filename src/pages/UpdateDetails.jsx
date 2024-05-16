@@ -9,22 +9,37 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const UpdateDetails = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [password, setpassword] = useState(null);
 
-  const [password, setpassword] = useState("");
   const [tracker, setTracker] = useState(false);
   const navigate = useNavigate();
+
+  const requestData = {};
+
+  if (password !== null) {
+    requestData.password = password;
+  }
+  if (firstName !== null) {
+    requestData.firstName = firstName;
+  }
+  if (lastName !== null) {
+    requestData.lastName = lastName;
+  }
 
   async function updateFun() {
     try {
       setTracker(true);
-      const res = await axios.post(
+      const res = await axios.put(
         "https://paynow-backend.onrender.com/api/v1/user/user-update",
         {
-          password,
-          firstName,
-          lastName,
+          requestData,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
       );
       localStorage.setItem("token", res.data.token);

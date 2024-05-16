@@ -133,7 +133,7 @@ export const Signin = () => {
                 >
                   <span className="sr-only">Loading...</span>
                 </div>
-                <p>Signing up...</p>
+                <p>Signing in...</p>
               </div>
             ) : (
               "SignIn"

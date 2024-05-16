@@ -31,9 +31,15 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <Appbar nameFirstLetter={firstName[0]} />
-      <Balance Userbalance={balance} />
-      <UserSearch />
+      {balance ? (
+        <>
+          <Appbar nameFirstLetter={firstName[0]} />
+          <Balance Userbalance={balance} />
+          <UserSearch />
+        </>
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   );
 };
