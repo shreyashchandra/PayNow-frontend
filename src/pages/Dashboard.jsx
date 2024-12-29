@@ -7,42 +7,64 @@ import { Loader } from "../components/Loader";
 
 export const Dashboard = () => {
   const [firstName, setFirstName] = useState("");
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(null); // Use null to distinguish between "loading" and "zero balance"
+  const [loading, setLoading] = useState(true); // Separate loading state for better control
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    try {
-      axios
-        .get("https://backend.paynow.shreyash.space/api/v1/bank/balance", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
-        .then((response) => {
-          const data = response.data; // Access the response data
-          setFirstName(data.firstName);
-          setBalance(data.balance);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    } catch (error) {
-      alert(error);
-    }
+    const fetchBalance = async () => {
+      try {
+        const response = await axios.get(
+          "https://backend.paynow.shreyash.space/api/v1/bank/balance",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const data = response.data;
+        setFirstName(data.firstName || "User");
+        setBalance(data.balance || 0);
+      } catch (err) {
+        console.error("Error fetching balance:", err);
+        setError("Failed to fetch balance. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBalance();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-500"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      {balance ? (
-        <>
-          <Appbar nameFirstLetter={firstName[0]} />
-          <Balance Userbalance={balance} />
-          <UserSearch />
-        </>
-      ) : (
-        <div className="flex items-center justify-center">
-          <Loader />
-        </div>
-      )}
+      <Appbar nameFirstLetter={firstName[0]} />
+      <Balance Userbalance={balance} />
+      <UserSearch />
     </div>
   );
 };
