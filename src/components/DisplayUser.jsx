@@ -24,6 +24,14 @@ export const DisplayUser = ({ fullName, id }) => {
       >
         Send Money
       </button>
+      <button
+        onClick={() => {
+          navigate(`/request?id=${id}&name=${fullName}`);
+        }}
+        className="mt-4 text-sm font-medium text-white bg-sky-600 py-2 px-6 rounded-md hover:bg-sky-500"
+      >
+        Request Money
+      </button>
     </div>
   );
 };
