@@ -19,7 +19,7 @@ export const UserSearch = () => {
           params: {
             filter,
             page,
-            limit: 10, // Number of users per page
+            limit: 12, // Number of users per page
           },
         }
       );
