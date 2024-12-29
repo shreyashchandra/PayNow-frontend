@@ -13,13 +13,16 @@ export const UserSearch = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(` http://localhost:3100/api/v1/user/bulk`, {
-        params: {
-          filter,
-          page,
-          limit: 10, // Number of users per page
-        },
-      });
+      const res = await axios.get(
+        ` https://backend.paynow.shreyash.space/api/v1/user/bulk`,
+        {
+          params: {
+            filter,
+            page,
+            limit: 10, // Number of users per page
+          },
+        }
+      );
       setUsers(res.data.users || []);
       setTotalPages(res.data.totalPages || 1); // Assuming backend returns total pages
     } catch (error) {
