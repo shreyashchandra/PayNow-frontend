@@ -12,7 +12,7 @@ export const Dashboard = () => {
   useEffect(() => {
     try {
       axios
-        .get("https://paynow-backend.onrender.com/api/v1/bank/balance", {
+        .get("https://backend.paynow.shreyash.space/api/v1/bank/balance", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

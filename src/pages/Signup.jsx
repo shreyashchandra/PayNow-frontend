@@ -20,7 +20,7 @@ export const Signup = () => {
     try {
       setTracker(true);
       const res = await axios.post(
-        "https://paynow-backend.onrender.com/api/v1/user/signup",
+        "https://backend.paynow.shreyash.space/api/v1/user/signup",
         {
           username,
           password,

@@ -10,7 +10,8 @@ export const UserSearch = () => {
   useEffect(() => {
     axios
       .get(
-        "https://paynow-backend.onrender.com/api/v1/user/bulk?filter=" + filter
+        "https://backend.paynow.shreyash.space/api/v1/user/bulk?filter=" +
+          filter
       )
       .then((res) => {
         setUsers(res.data.user);

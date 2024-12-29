@@ -16,7 +16,7 @@ export const SendMoney = () => {
   async function sendMoneyFun() {
     setTracker(true);
     const res = await axios.post(
-      "https://paynow-backend.onrender.com/api/v1/bank/transfer",
+      "https://backend.paynow.shreyash.space/api/v1/bank/transfer",
       {
         amount_to_transfer: amount,
         paye_id: id,

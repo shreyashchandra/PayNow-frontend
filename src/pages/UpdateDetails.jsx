@@ -32,7 +32,7 @@ export const UpdateDetails = () => {
     try {
       setTracker(true);
       const res = await axios.put(
-        "https://paynow-backend.onrender.com/api/v1/user/user-update",
+        "https://backend.paynow.shreyash.space/api/v1/user/user-update",
         {
           requestData,
         },
