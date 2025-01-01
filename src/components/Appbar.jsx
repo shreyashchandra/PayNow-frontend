@@ -63,7 +63,7 @@ export const Appbar = ({ nameFirstLetter }) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between border-b-2 border-slate-300 px-5">
+    <div className="flex items-center justify-between border-b-2 border-slate-300 px-5 py-5">
       <h1 className="flex items-center gap-2 text-2xl font-bold text-sky-600 cursor-default">
         PayNow
         <span>
@@ -78,10 +78,13 @@ export const Appbar = ({ nameFirstLetter }) => {
         <h3 className="text-gray-300">Hello,</h3>
         <div className="relative">
           <div
-            className="cursor-pointer text-white font-bold m-3 w-5 h-5 bg-sky-600 rounded-full flex justify-center items-center text-center p-5 shadow-xl hover:bg-sky-500"
+            className=" relative group cursor-pointer text-white font-bold m-3 w-5 h-5 bg-sky-600 rounded-full flex justify-center items-center text-center p-5 shadow-xl hover:bg-sky-500"
             onClick={toUpdateUser}
           >
             {nameFirstLetter}
+            <span className="absolute bottom-full mb-1 w-max px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity">
+              Update Profile
+            </span>
           </div>
         </div>
         <div className="relative">
