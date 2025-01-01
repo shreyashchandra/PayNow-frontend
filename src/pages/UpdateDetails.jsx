@@ -39,7 +39,6 @@ export const UpdateDetails = () => {
           },
         }
       );
-      localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
       window.location.reload(false);
       setTracker(false);
