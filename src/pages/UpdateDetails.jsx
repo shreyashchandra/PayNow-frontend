@@ -16,25 +16,22 @@ export const UpdateDetails = () => {
   const [tracker, setTracker] = useState(false);
   const navigate = useNavigate();
 
-  const requestData = {};
-
-  if (password !== null) {
-    requestData.password = password;
-  }
-  if (firstName !== null) {
-    requestData.firstName = firstName;
-  }
-  if (lastName !== null) {
-    requestData.lastName = lastName;
-  }
+  const getPayload = () => {
+    const payload = {};
+    if (password) payload.password = password;
+    if (firstName) payload.firstName = firstName;
+    if (lastName) payload.lastName = lastName;
+    return payload;
+  };
 
   async function updateFun() {
     try {
       setTracker(true);
+      const payload = getPayload();
       const res = await axios.put(
         "https://backend.paynow.shreyash.space/api/v1/user/user-update",
         {
-          requestData,
+          payload,
         },
         {
           headers: {
