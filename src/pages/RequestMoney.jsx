@@ -51,7 +51,7 @@ export const RequestMoney = () => {
 
   return (
     <div className="p-28 w-full md:w-[550px] md:h-[600px] mt-20 mx-auto bg-slate-950 rounded-lg text-slate-200">
-      <Heading title={"Send Money"} />
+      <Heading title={"Request Money"} />
       <SendDisplayUser />
       <Inputbox
         onChange={(e) => {
