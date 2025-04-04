@@ -14,7 +14,7 @@ export const UserSearch = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        ` https://backend.paynow.shreyash.space/api/v1/user/bulk`,
+        ` https://paynow-backend.onrender.com/api/v1/user/bulk`,
         {
           params: {
             filter,

@@ -30,7 +30,7 @@ export const Appbar = ({ nameFirstLetter }) => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          "https://backend.paynow.shreyash.space/api/v1/bank/request/list",
+          "https://paynow-backend.onrender.com/api/v1/bank/request/list",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

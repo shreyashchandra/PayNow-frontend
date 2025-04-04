@@ -29,7 +29,7 @@ export const UpdateDetails = () => {
       setTracker(true);
       const payload = getPayload();
       const res = await axios.put(
-        "https://backend.paynow.shreyash.space/api/v1/user/user-update",
+        "https://paynow-backend.onrender.com/api/v1/user/user-update",
         {
           payload,
         },

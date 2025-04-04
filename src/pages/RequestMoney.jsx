@@ -21,7 +21,7 @@ export const RequestMoney = () => {
       console.log("Token:", token); // Log the token
 
       const res = await axios.post(
-        "https://backend.paynow.shreyash.space/api/v1/bank/create/request",
+        "https://paynow-backend.onrender.com/api/v1/bank/create/request",
         {
           amount: amount,
           toId: id,
