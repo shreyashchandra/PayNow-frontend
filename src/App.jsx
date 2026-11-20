@@ -1,81 +1,88 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ConnectionBanner } from "./components/ConnectionBanner";
+import { AppShell } from "./components/AppShell";
+import { warmUp } from "./lib/api";
 import { Signup } from "./pages/Signup";
 import { Signin } from "./pages/Signin";
 import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
-import { Me } from "./components/Me";
-import { UpdateDetails } from "./pages/UpdateDetails";
 import { RequestMoney } from "./pages/RequestMoney";
+import { UpdateDetails } from "./pages/UpdateDetails";
+import { NotFound } from "./pages/NotFound";
+
+function RequireAuth() {
+  const { isAuthed } = useAuth();
+  const location = useLocation();
+  if (!isAuthed) {
+    return <Navigate to="/signin" replace state={{ from: location.pathname + location.search }} />;
+  }
+  return <Outlet />;
+}
+
+function GuestOnly() {
+  const { isAuthed } = useAuth();
+  return isAuthed ? <Navigate to="/dashboard" replace /> : <Outlet />;
+}
+
+function Home() {
+  const { isAuthed } = useAuth();
+  return <Navigate to={isAuthed ? "/dashboard" : "/signin"} replace />;
+}
+
+function TitleSync() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const titles = {
+      "/signin": "Sign in",
+      "/signup": "Open an account",
+      "/dashboard": "Overview",
+      "/send": "Pay",
+      "/request": "Request",
+      "/update-user": "Profile",
+    };
+    document.title = titles[pathname] ? `${titles[pathname]} · PayNow` : "PayNow";
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function App() {
+  // Start waking the (possibly sleeping) server as soon as the page opens.
+  useEffect(() => {
+    warmUp();
+  }, []);
+
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Me rt={"dashboard"} />} />
-          <Route
-            path="/signup"
-            element={
-              localStorage.getItem("token") ? (
-                <Navigate to={"/dashboard"} />
-              ) : (
-                <Signup />
-              )
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              localStorage.getItem("token") ? (
-                <Navigate to={"/dashboard"} />
-              ) : (
-                <Signin />
-              )
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              localStorage.getItem("token") ? (
-                <Dashboard />
-              ) : (
-                <Navigate to={"/signin"} />
-              )
-            }
-          />
-          <Route
-            path="/send"
-            element={
-              localStorage.getItem("token") ? (
-                <SendMoney />
-              ) : (
-                <Navigate to={"/signin"} />
-              )
-            }
-          />
-          <Route
-            path="/update-user"
-            element={
-              localStorage.getItem("token") ? (
-                <UpdateDetails />
-              ) : (
-                <Navigate to={"/signin"} />
-              )
-            }
-          />
-          <Route
-            path="/request"
-            element={
-              localStorage.getItem("token") ? (
-                <RequestMoney />
-              ) : (
-                <Navigate to={"/signin"} />
-              )
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ErrorBoundary>
+      <ToastProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <TitleSync />
+            <ConnectionBanner />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route element={<GuestOnly />}>
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
+              </Route>
+              <Route element={<RequireAuth />}>
+                <Route element={<AppShell />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/send" element={<SendMoney />} />
+                  <Route path="/request" element={<RequestMoney />} />
+                  <Route path="/update-user" element={<UpdateDetails />} />
+                </Route>
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   );
 }
 

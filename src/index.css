@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-image: url("https://raw.githubusercontent.com/shreyashchandra/PayNow-frontend/main/public/bg.png");
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: "ss01";
+  }
+  ::selection {
+    @apply bg-ledger text-paper-raised;
+  }
+  :focus-visible {
+    outline: 2px solid #1e4d3a;
+    outline-offset: 2px;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .eyebrow {
+    @apply text-label font-medium uppercase text-ink-muted;
+  }
+  .hairline {
+    @apply border-rule;
+  }
+  /* A ruled ledger background used on the auth page's sample receipt. */
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 43px,
+      #dcd6c8 43px,
+      #dcd6c8 44px
+    );
+  }
 }
