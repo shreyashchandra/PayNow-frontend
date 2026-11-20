@@ -349,7 +349,15 @@ function Activity() {
 
   return (
     <section>
-      <SectionHeading>Recent activity</SectionHeading>
+      <SectionHeading
+        aside={
+          <Link to="/history" className="text-[13px] text-ink-soft underline-offset-4 hover:text-ink hover:underline">
+            View all →
+          </Link>
+        }
+      >
+        Recent activity
+      </SectionHeading>
       {state.status === "loading" && state.data.length === 0 ? (
         <div className="mt-4 space-y-3">
           <Skeleton className="h-5 w-full" />

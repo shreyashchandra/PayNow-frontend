@@ -81,6 +81,7 @@ export function AppShell() {
             <Logo to="/dashboard" />
             <nav className="hidden items-center gap-6 text-sm sm:flex">
               <TopLink to="/dashboard">Overview</TopLink>
+              <TopLink to="/history">History</TopLink>
               <TopLink to="/update-user">Profile</TopLink>
             </nav>
           </div>
@@ -102,6 +103,11 @@ export function AppShell() {
             </button>
           </div>
         </div>
+        <nav className="flex gap-6 border-t border-rule px-4 text-sm sm:hidden">
+          <TopLink to="/dashboard">Overview</TopLink>
+          <TopLink to="/history">History</TopLink>
+          <TopLink to="/update-user">Profile</TopLink>
+        </nav>
       </header>
 
       <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 sm:px-6 sm:pt-12">

@@ -13,6 +13,7 @@ import { SendMoney } from "./pages/SendMoney";
 import { RequestMoney } from "./pages/RequestMoney";
 import { UpdateDetails } from "./pages/UpdateDetails";
 import { NotFound } from "./pages/NotFound";
+import { History } from "./pages/History";
 
 function RequireAuth() {
   const { isAuthed } = useAuth();
@@ -42,6 +43,7 @@ function TitleSync() {
       "/dashboard": "Overview",
       "/send": "Pay",
       "/request": "Request",
+      "/history": "History",
       "/update-user": "Profile",
     };
     document.title = titles[pathname] ? `${titles[pathname]} · PayNow` : "PayNow";
@@ -74,6 +76,7 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/send" element={<SendMoney />} />
                   <Route path="/request" element={<RequestMoney />} />
+                  <Route path="/history" element={<History />} />
                   <Route path="/update-user" element={<UpdateDetails />} />
                 </Route>
               </Route>
